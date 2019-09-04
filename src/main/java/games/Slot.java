@@ -87,7 +87,7 @@ public class Slot {
             }
         }
     }
-    public static void main(String[] args) {
+    public static void main(String... __) {
         Slot slot = new Slot();
         slot.startGame();
     }
