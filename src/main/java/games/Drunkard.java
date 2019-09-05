@@ -1,53 +1,100 @@
 package games;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
-public class Drunkard {
+class Drunkard {
 
     private static final int PARS_TOTAL_COUNT = Par.values().length;
 
     private static final int CARDS_TOTAL_COUNT = PARS_TOTAL_COUNT * Suit.values().length; //36
 
-    private static int[] playerCardHeads = new int[2];
+    private static LinkedList<String> deckOfCards = new <String> LinkedList();
 
-    private static int[] playerCardTails = new int[2];
-    
+    private static LinkedList<String> player1DeckOfCards = new <String> LinkedList();
+
+    private static LinkedList<String> player2DeckOfCards = new <String> LinkedList();
+
+    public static List<String> getDeckOfCards() {
+        return deckOfCards;
+    }
+
     private static Suit getSuit(int cardNumber) {
         return Suit.values()[cardNumber / PARS_TOTAL_COUNT];
     }
 
+    public static List<String> getPlayer1DeckOfCards() {
+        return player1DeckOfCards;
+    }
+
+    public static List<String> getPlayer2DeckOfCards() {
+        return player2DeckOfCards;
+    }
+
     private static Par getPar(int cardNumber) {
+
         return Par.values()[cardNumber % PARS_TOTAL_COUNT];
     }
 
-    private static String toString(int cardNumber) {
-        return getPar(cardNumber) + " " + getSuit(cardNumber);
+    private static String createCard(int cardNumber) {
+        return getPar(cardNumber) + "_" + getSuit(cardNumber);
     }
 
-    private static int incrementIndex(int i) {
-      return (i + 1) % CARDS_TOTAL_COUNT;
+    private static void createDeckOfCards() {
+
+        for (int i = 0; i < CARDS_TOTAL_COUNT; i++) {
+            getDeckOfCards().add(createCard(i));
+        }
     }
 
-    private static boolean playerCardsIsEmpty(int playerIndex) {
-      int tail = playerCardTails[playerIndex];
-      int head = playerCardHeads[playerIndex];
-
-      return tail == head;
+    private static void dealCards() {
+        for (int i = 0; i < CARDS_TOTAL_COUNT / 2; i++) {
+            player1DeckOfCards.add(deckOfCards.get(i));
+        }
+        for (int y = CARDS_TOTAL_COUNT / 2; y < CARDS_TOTAL_COUNT; y++) {
+            player2DeckOfCards.add(deckOfCards.get(y));
+        }
     }
-
-    private static String (int cardNumber1, int cardNumber2) {
-      
+/***
+    private static void stepOfGame() {
+        while (player2DeckOfCards.isEmpty() || player1DeckOfCards.isEmpty()) {
+            int i = 0;
+            i++;
+            if (player1DeckOfCards.get(i))
+        }
     }
-
-    private static void startGame() {
-      System.out.printf("Итерация №1 Игрок №1 карта: %s; игрок №2 карта: %s.%n", player1.toString(), player2.toString()); 
-      System.out.printf("Выиграл %s!%n", whoWin()); 
-      System.out.printf("У игрока №1 %s карт, у игрока №2 %s карт%n", player1.playerCardHeads(), player2.playerCardHeads());
-    }
+***/
 
     public static void main(String... __) {
 
-        System.out.println(toString(35));
+        createDeckOfCards();
+
+/***        Collections.shuffle(getDeckOfCards());
+
+        dealCards();
+
+        int a = 0;
+        for (String str: getPlayer1DeckOfCards()) {
+            a++;
+            System.out.println(a + " - card of player1 - " + str);
+        }
+
+        System.out.println("-------------");
+
+        for (String str: getPlayer2DeckOfCards()) {
+            a++;
+            System.out.println(a + " - card of player2 - " + str);
+        }
+ ***/
+        int a = 0;
+        for (String str: getDeckOfCards()) {
+            a++;
+            System.out.println(a + " - card of player1 - " + str);
+        }
+
+        System.out.println(getPar(5).compareTo(getPar(4)));
+
 
     }
 }
