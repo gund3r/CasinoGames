@@ -1,5 +1,9 @@
 package games;
 
+/**
+ * Created by gun on 02/09/2019.
+ */
+
 import java.util.Random;
 
 public class Slot {
@@ -92,3 +96,6 @@ public class Slot {
         slot.startGame();
     }
 }
+
+
+

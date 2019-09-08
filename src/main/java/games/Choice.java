@@ -2,6 +2,9 @@ package games;
 
 import java.io.IOException;
 
+/**
+ * Created by gun on 02/09/2019.
+ */
 public class Choice {
 
         public static void main(String[] args) throws IOException {
