@@ -45,6 +45,8 @@ public class Drunkard {
 
     private static void firstDeckWin() {
 
+        System.out.printf("У Игрока №1 карта: %s, у Игрока №2 карта: %s%n", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
+
         firstDeck.add(secondDeck.getFirst()); // в 1 колоду добавляем карту из колоды 2
 
         secondDeck.remove(); // в колоде 2 удаляем карту которую добавили в колоду 1
@@ -53,14 +55,14 @@ public class Drunkard {
 
         firstDeck.remove();
 
-        System.out.printf("Выиграл Игрок1!%n");
-        System.out.printf("У Игрок1 осталось %d карт %n", (firstDeck.size()));
-        System.out.printf("У Игрок2 осталось %d карт %n", (secondDeck.size()));
+        System.out.printf("Выиграл Игрок1!%nУ Игрока №1 %d карт, у Игрока №2 %d.%n", firstDeck.size(), secondDeck.size());
         System.out.println("-----------------------------------------");
 
     }
 
     private static void secondDeckWin() {
+
+        System.out.printf("У Игрока №1 карта: %s, у Игрока №2 карта: %s%n", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
 
         secondDeck.add(firstDeck.getFirst()); // в 2 колоду добавляем карту из колоды 1
 
@@ -70,14 +72,14 @@ public class Drunkard {
 
         secondDeck.remove();
 
-        System.out.printf("Выиграл Игрок2!%n");
-        System.out.printf("У Игрок1 осталось %d карт %n", (firstDeck.size()));
-        System.out.printf("У Игрок2 осталось %d карт %n", (secondDeck.size()));
+        System.out.printf("Выиграл Игрок2!%nУ Игрока №1 %d карт, у Игрока №2 %d.%n", firstDeck.size(), secondDeck.size());
         System.out.println("-----------------------------------------");
 
     }
 
     private static void dispute() {
+
+        System.out.printf("У Игрока №1 карта: %s, у Игрока №2 карта: %s%n", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
 
         Card firstCardInFirst = firstDeck.getFirst();
 
@@ -91,9 +93,7 @@ public class Drunkard {
 
         secondDeck.remove();
 
-        System.out.println("Спор! Игроки остаются при своих картах");
-        System.out.printf("У Игрок1 осталось %d карт %n", (firstDeck.size()));
-        System.out.printf("У Игрок2 осталось %d карт %n", (secondDeck.size()));
+        System.out.printf("Спор! Игроки остаются при своих картах%nУ Игрока №1 %d карт, у Игрока №2 %d.%n", firstDeck.size(), secondDeck.size());
         System.out.println("-----------------------------------------");
 
     }
@@ -101,7 +101,13 @@ public class Drunkard {
 
     private static void startGame() {
 
+        int countOfIterations = 0;
+
         while (!firstDeck.isEmpty() || !secondDeck.isEmpty()) {
+
+            countOfIterations += 1;
+
+            System.out.printf("Итерация %S%n", countOfIterations);
 
             if (getCardDignity(firstDeck.getFirst()) > getCardDignity(secondDeck.getFirst())) {
                 firstDeckWin();
@@ -139,4 +145,3 @@ public class Drunkard {
 
     }
 }
-
