@@ -2,13 +2,10 @@ package games;
 
 import java.util.*;
 import java.util.List;
-import static games.Card.getCardDignity;
+
+import static games.Card.*;
 
 public class Drunkard {
-
-    private static final int PARS_TOTAL_COUNT = Par.values().length;
-
-    private static final int CARDS_TOTAL_COUNT = PARS_TOTAL_COUNT * Suit.values().length; //36
 
     private static LinkedList<Card> deckOfCards = new LinkedList<Card>();
 
@@ -16,21 +13,13 @@ public class Drunkard {
 
     private static LinkedList<Card> secondDeck = new LinkedList<Card>();
 
-    static int getParsTotalCount() {
-        return PARS_TOTAL_COUNT;
-    }
-
-    static int getCardsTotalCount() {
-        return CARDS_TOTAL_COUNT;
-    }
-
     private static List<Card> getDeckOfCards() {
         return deckOfCards;
     }
 
     private static void createDeckOfCards() {
         for (int i = 0; i < getCardsTotalCount(); i++) {
-            getDeckOfCards().add(Card.createCard(i));
+            getDeckOfCards().add(createCard(i));
         }
     }
 
@@ -43,7 +32,7 @@ public class Drunkard {
         }
     }
 
-    private static void firstDeckWin() {
+    private static void whenFirstDeckWin() {
 
         System.out.printf("У Игрока №1 карта: %s, у Игрока №2 карта: %s%n", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
 
@@ -60,7 +49,7 @@ public class Drunkard {
 
     }
 
-    private static void secondDeckWin() {
+    private static void whenSecondDeckWin() {
 
         System.out.printf("У Игрока №1 карта: %s, у Игрока №2 карта: %s%n", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
 
@@ -110,11 +99,11 @@ public class Drunkard {
             System.out.printf("Итерация %S%n", countOfIterations);
 
             if (getCardDignity(firstDeck.getFirst()) > getCardDignity(secondDeck.getFirst())) {
-                firstDeckWin();
+                whenFirstDeckWin();
             }
 
             if (getCardDignity(secondDeck.getFirst()) > getCardDignity(firstDeck.getFirst())) {
-                secondDeckWin();
+                whenSecondDeckWin();
             }
 
             if ((getCardDignity(secondDeck.getFirst()) == getCardDignity(firstDeck.getFirst()))) {
