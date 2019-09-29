@@ -1,12 +1,16 @@
 package games;
 
 import org.apache.commons.math3.util.MathArrays;
+import org.slf4j.Logger;
+
 import java.io.IOException;
 
 import static games.Card.*;
 import static games.Choice.getCharacterFromUser;
 
 public class BlackJack {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BlackJack.class);
 
     private static final int MAX_VALUE = 21;
 
@@ -22,29 +26,27 @@ public class BlackJack {
 
     private static int cursorOfDeck;
 
-    private static int bet = 10;
-
     private static String printCard(int cardNumber) {
         return getSuit(cardNumber) + "_" + getPar(cardNumber);
     }
 
-    public static int getFirstPlayerMoney() {
+    private static int getFirstPlayerMoney() {
         return playersMoney[0];
     }
 
-    public static int getSecondPlayerMoney() {
+    private static int getSecondPlayerMoney() {
         return playersMoney[1];
     }
 
-    static int getCursorOfDeck() {
+    private static int getCursorOfDeck() {
         return cursorOfDeck;
     }
 
-    static void increaseCursorOfDeck() {
+    private static void increaseCursorOfDeck() {
         cursorOfDeck += 1;
     }
 
-    static void increasePlayersCardCursor(int player) {
+    private static void increasePlayersCardCursor(int player) {
         switch (player) {
             case 1:
                 playerCardsCursor[0] += 1;
@@ -55,11 +57,11 @@ public class BlackJack {
         }
     }
 
-    public static int getBet() {
-        return bet;
+    private static int getBet() {
+        return 10;
     }
 
-    static int[] getShuffledCards() {
+    private static int[] getShuffledCards() {
         // колода подряд
         int[] cards = {
                 0, 1, 2, 3, 4, 5, 6, 7, 8,  // бубны
@@ -71,7 +73,7 @@ public class BlackJack {
         return cards;
     }
 
-    static boolean confirm() throws IOException {
+    private static boolean confirm() throws IOException {
         System.out.println("Берем еще? \"Y\" - Да, {любой другой символ} - нет (Чтобы выйти из игры, нажмите Ctrl + C)");
         switch (getCharacterFromUser()) {
             case 'Y':
@@ -115,7 +117,7 @@ public class BlackJack {
         }
     }
 
-    static void firstPlayerRound() throws IOException {
+    private static void firstPlayerRound() throws IOException {
         addCardToPlayer(1);
         System.out.printf("Вам выпала карта %s%n", printCard(getCard()));
         increasePlayersCardCursor(1);
@@ -134,7 +136,7 @@ public class BlackJack {
             }
         }
 
-    static void secondPlayerRound() {
+    private static void secondPlayerRound() {
         addCardToPlayer(2);
         System.out.printf("Компьютеру выпала карта %s%n", printCard(getCard()));
         increasePlayersCardCursor(2);
@@ -152,19 +154,19 @@ public class BlackJack {
         } while (getSecondPlayerSum() < 15);
     }
 
-    static void startGame() throws IOException {
+    private static void startGame() throws IOException {
         while(getFirstPlayerMoney() > 0) {
             initRound();
             firstPlayerRound();
             secondPlayerRound();
-            if (getFirstPlayerSum() < getSecondPlayerSum() || getFirstPlayerSum() == 21) {
+            if (getFirstPlayerSum() < getSecondPlayerSum() || getFirstPlayerSum() == MAX_VALUE) {
                 playersMoney[1] -= getBet();
                 playersMoney[0] += getBet();
                 System.out.printf("У Вас %d очков, у Компьютера %d очков.%n", getFirstPlayerSum(), getSecondPlayerSum());
                 System.out.printf("%nЭтот раунд за Вами! :)" + "%n");
                 System.out.println("");
             }
-            else if (getFirstPlayerSum() > getSecondPlayerSum() || getSecondPlayerSum() == 21)  {
+            else if (getFirstPlayerSum() > getSecondPlayerSum() || getSecondPlayerSum() == MAX_VALUE)  {
                 playersMoney[0] -= getBet();
                 playersMoney[1] += getBet();
                 System.out.printf("У Вас %d очков, у Компьютера %d очков.%n", getFirstPlayerSum(), getSecondPlayerSum());

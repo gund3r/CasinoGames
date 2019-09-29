@@ -1,5 +1,8 @@
 games/Slot.class
-games/Drunkard.class
+games/BlackJack.class
 games/Suit.class
 games/Choice.class
+games/Card$1.class
 games/Par.class
+games/Card.class
+games/Drunkard.class

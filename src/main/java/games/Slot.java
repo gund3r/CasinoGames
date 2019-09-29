@@ -1,12 +1,12 @@
 package games;
 
-/**
- * Created by gun on 02/09/2019.
- */
+import org.slf4j.Logger;
 
 import java.util.Random;
 
 public class Slot {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Slot.class);
 
     private int money = 100;
 
@@ -20,31 +20,31 @@ public class Slot {
 
     private int reel3;
 
-    public int getReel1() {
+    private int getReel1() {
         return reel1;
     }
 
-    public void setReel1(int reel1) {
+    private void setReel1(int reel1) {
         this.reel1 = reel1;
     }
 
-    public int getReel2() {
+    private int getReel2() {
         return reel2;
     }
 
-    public void setReel2(int reel2) {
+    private void setReel2(int reel2) {
         this.reel2 = reel2;
     }
 
-    public int getReel3() {
+    private int getReel3() {
         return reel3;
     }
 
-    public void setReel3(int reel3) {
+    private void setReel3(int reel3) {
         this.reel3 = reel3;
     }
 
-    public int getMoney() {
+    private int getMoney() {
         return money;
     }
 
@@ -52,11 +52,11 @@ public class Slot {
         this.money = money;
     }
 
-    public int getBet() {
+    private int getBet() {
         return bet;
     }
 
-    public int getSize() {
+    private int getSize() {
         return size;
     }
 
@@ -79,9 +79,9 @@ public class Slot {
             setReel1(r.nextInt(getSize()));
             setReel2(r.nextInt(getSize()));
             setReel3(r.nextInt(getSize()));
-            System.out.printf("У Вас %d%s, ставка - %d%s%n", getMoney(), "$", getBet(), "$");
-            System.out.println("Крутим барабаны! Розыгрыш принёс следующие результаты:");
-            System.out.printf("первый барабан - %d, второй - %d, третий - %d%n", getReel1(), getReel2(), getReel3());
+            log.info("У Вас " + getMoney() + "$, ставка " + getBet() + "S");
+            log.info("Крутим барабаны! Розыгрыш принёс следующие результаты:");
+            log.info("первый барабан - %d, второй - %d, третий - %d%n", getReel1(), getReel2(), getReel3());
             if (!isWin()) {
                 minusMoney();
                 System.out.printf("Проигрыш, ваш капитал теперь составляет: - %d%s%n", getMoney(), "$");

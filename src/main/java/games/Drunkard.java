@@ -1,11 +1,15 @@
 package games;
 
+import org.slf4j.Logger;
+
 import java.util.*;
 import java.util.List;
 
 import static games.Card.*;
 
 public class Drunkard {
+
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
 
     private static LinkedList<Card> deckOfCards = new LinkedList<Card>();
 
