@@ -79,15 +79,15 @@ public class Slot {
             setReel1(r.nextInt(getSize()));
             setReel2(r.nextInt(getSize()));
             setReel3(r.nextInt(getSize()));
-            log.info("У Вас " + getMoney() + "$, ставка " + getBet() + "S");
+            log.info("У Вас {}$, ставка {}$", getMoney(), getBet());
             log.info("Крутим барабаны! Розыгрыш принёс следующие результаты:");
-            log.info("первый барабан - %d, второй - %d, третий - %d%n", getReel1(), getReel2(), getReel3());
+            log.info("первый барабан - {}, второй - {}, третий - {}", getReel1(), getReel2(), getReel3());
             if (!isWin()) {
                 minusMoney();
-                System.out.printf("Проигрыш, ваш капитал теперь составляет: - %d%s%n", getMoney(), "$");
+                log.info("Проигрыш, ваш капитал теперь составляет: - {}$", getMoney());
             } else {
                 plusMoney();
-                System.out.printf("Выигрыш 1000%s, ваш капитал теперь составляет: - %d%s%n", "$", getMoney(), "$");
+                log.info("Выигрыш 1000$, ваш капитал теперь составляет: - {}", getMoney());
             }
         }
     }

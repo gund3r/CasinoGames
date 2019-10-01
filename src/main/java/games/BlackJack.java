@@ -74,7 +74,7 @@ public class BlackJack {
     }
 
     private static boolean confirm() throws IOException {
-        System.out.println("Берем еще? \"Y\" - Да, {любой другой символ} - нет (Чтобы выйти из игры, нажмите Ctrl + C)");
+        log.info("Берем еще? \"Y\" - Да, {любой другой символ} - нет (Чтобы выйти из игры, нажмите Ctrl + C)");
         switch (getCharacterFromUser()) {
             case 'Y':
             case 'y': return true;
@@ -83,7 +83,7 @@ public class BlackJack {
     }
 
     private static void initRound() {
-        System.out.printf("У Вас %d$, у компьютера - %d$. Начинаем новый раунд!%n", getFirstPlayerMoney(), getSecondPlayerMoney());
+        log.info("У Вас {}$, у компьютера - {}$. Начинаем новый раунд!", getFirstPlayerMoney(), getSecondPlayerMoney());
         cards = getShuffledCards();
         playersCards = new int[2][MAX_CARDS_COUNT];
         playerCardsCursor = new int[]{0, 0};
@@ -119,18 +119,18 @@ public class BlackJack {
 
     private static void firstPlayerRound() throws IOException {
         addCardToPlayer(1);
-        System.out.printf("Вам выпала карта %s%n", printCard(getCard()));
+        log.info("Вам выпала карта {}", printCard(getCard()));
         increasePlayersCardCursor(1);
         increaseCursorOfDeck();
         addCardToPlayer(1);
-        System.out.printf("Вам выпала карта %s%n", printCard(getCard()));
+        log.info("Вам выпала карта {}", printCard(getCard()));
         increasePlayersCardCursor(1);
         increaseCursorOfDeck();
-        System.out.printf("У вас %d%n", getFirstPlayerSum());
+        log.info("У вас {}", getFirstPlayerSum());
         while (confirm()) {
             addCardToPlayer(1);
-            System.out.printf("Вам выпала карта %s%n", printCard(getCard()));
-            System.out.printf("У вас %d%n", getFirstPlayerSum());
+            log.info("Вам выпала карта {}", printCard(getCard()));
+            log.info("У вас {}", getFirstPlayerSum());
             increasePlayersCardCursor(1);
             increaseCursorOfDeck();
             }
@@ -138,17 +138,17 @@ public class BlackJack {
 
     private static void secondPlayerRound() {
         addCardToPlayer(2);
-        System.out.printf("Компьютеру выпала карта %s%n", printCard(getCard()));
+        log.info("Компьютеру выпала карта {}", printCard(getCard()));
         increasePlayersCardCursor(2);
         increaseCursorOfDeck();
         addCardToPlayer(2);
-        System.out.printf("Компьютеру выпала карта %s%n", printCard(getCard()));
+        log.info("Компьютеру выпала карта {}", printCard(getCard()));
         increasePlayersCardCursor(2);
         increaseCursorOfDeck();
-        System.out.printf("У Компьютера %s очков.%n", getSecondPlayerSum());
+        log.info("У Компьютера {} очков", getSecondPlayerSum());
         do {
             addCardToPlayer(2);
-            System.out.printf("Компьютер решил взять еще одну карту %s%n", printCard(getCard()));
+            log.info("Компьютер решил взять еще одну карту {}", printCard(getCard()));
             increaseCursorOfDeck();
             increasePlayersCardCursor(2);
         } while (getSecondPlayerSum() < 15);
@@ -162,25 +162,23 @@ public class BlackJack {
             if (getFirstPlayerSum() < getSecondPlayerSum() || getFirstPlayerSum() == MAX_VALUE) {
                 playersMoney[1] -= getBet();
                 playersMoney[0] += getBet();
-                System.out.printf("У Вас %d очков, у Компьютера %d очков.%n", getFirstPlayerSum(), getSecondPlayerSum());
-                System.out.printf("%nЭтот раунд за Вами! :)" + "%n");
-                System.out.println("");
+                log.info("У Вас {} очков, у Компьютера {} очков.", getFirstPlayerSum(), getSecondPlayerSum());
+                log.info("Этот раунд за Вами! :)");
             }
             else if (getFirstPlayerSum() > getSecondPlayerSum() || getSecondPlayerSum() == MAX_VALUE)  {
                 playersMoney[0] -= getBet();
                 playersMoney[1] += getBet();
-                System.out.printf("У Вас %d очков, у Компьютера %d очков.%n", getFirstPlayerSum(), getSecondPlayerSum());
-                System.out.printf("%nЭтот раунд за Компьютером! :)" + "%n");
-                System.out.println("");
+                log.info("У Вас {} очков, у Компьютера {} очков.", getFirstPlayerSum(), getSecondPlayerSum());
+                log.info("Этот раунд за Компьютером! :)");
             }
             else if (getSecondPlayerSum() < 0) {
                 break;
             }
         }
         if (getFirstPlayerMoney() > 0) {
-            System.out.printf("%nВы выиграли! Поздравляем! :)%n");
+            log.info("Вы выиграли! Поздравляем! :)");
         } else {
-            System.out.printf("%nВы проиграли. Пичалька... :(%n");
+            System.out.printf("Вы проиграли. Пичалька... :(");
         }
     }
 
