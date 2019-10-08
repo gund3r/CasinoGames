@@ -1,5 +1,5 @@
 run:
-	java -jar ./target/java-project-lvl1-1.0-SNAPSHOT-jar-with-dependencies.jar
+	java -jar ./src/main/resources/java-project-lvl1-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 build: clear update
 	./mvnw verify

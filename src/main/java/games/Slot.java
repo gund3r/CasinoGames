@@ -6,96 +6,37 @@ import java.util.Random;
 
 public class Slot {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(Slot.class);
+    public static void main(String... __) {
 
-    private int money = 100;
+        Logger log = org.slf4j.LoggerFactory.getLogger(Slot.class);
 
-    private int bet = 10;
+        int money = 100;
 
-    private int size = 7;
+        int bet = 10;
 
-    private int reel1;
+        int size = 7;
 
-    private int reel2;
+        int reel1;
 
-    private int reel3;
+        int reel2;
 
-    private int getReel1() {
-        return reel1;
-    }
+        int reel3;
 
-    private void setReel1(int reel1) {
-        this.reel1 = reel1;
-    }
-
-    private int getReel2() {
-        return reel2;
-    }
-
-    private void setReel2(int reel2) {
-        this.reel2 = reel2;
-    }
-
-    private int getReel3() {
-        return reel3;
-    }
-
-    private void setReel3(int reel3) {
-        this.reel3 = reel3;
-    }
-
-    private int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    private int getBet() {
-        return bet;
-    }
-
-    private int getSize() {
-        return size;
-    }
-
-    private boolean isWin() {
-        return reel1 == reel2 && reel2 == reel3;
-    }
-
-    private void plusMoney() {
-        int prize = 1000;
-        money += prize;
-    }
-
-    private void minusMoney() {
-        money -= bet;
-    }
-
-    private void startGame() {
-        while (getMoney() > 0) {
+        while (money > 0) {
             Random r = new Random();
-            setReel1(r.nextInt(getSize()));
-            setReel2(r.nextInt(getSize()));
-            setReel3(r.nextInt(getSize()));
-            log.info("У Вас {}$, ставка {}$", getMoney(), getBet());
+            reel1 = r.nextInt(size);
+            reel2 = r.nextInt(size);
+            reel3 = r.nextInt(size);
+            log.info("У Вас {}$, ставка {}$", money, bet);
             log.info("Крутим барабаны! Розыгрыш принёс следующие результаты:");
-            log.info("первый барабан - {}, второй - {}, третий - {}", getReel1(), getReel2(), getReel3());
-            if (!isWin()) {
-                minusMoney();
-                log.info("Проигрыш, ваш капитал теперь составляет: - {}$", getMoney());
+            log.info("первый барабан - {}, второй - {}, третий - {}", reel1, reel2, reel3);
+            if (reel1 == reel2 && reel2 == reel3) {
+                money += 1000;
+                log.info("Выигрыш 1000$, ваш капитал теперь составляет: - {}$", money);
             } else {
-                plusMoney();
-                log.info("Выигрыш 1000$, ваш капитал теперь составляет: - {}", getMoney());
+                money -= bet;
+                log.info("Проигрыш, ваш капитал теперь составляет: - {}$", money);
             }
         }
     }
-    public static void main(String... __) {
-        Slot slot = new Slot();
-        slot.startGame();
-    }
 }
-
-
-

@@ -6,8 +6,8 @@ enum Par {
     EIGHT,
     NINE,
     TEN,
-    JACK, // Валет
-    QUEEN, // Дама
-    KING, // Король
-    ACE // Туз
+    JACK,
+    QUEEN,
+    KING,
+    ACE
 }

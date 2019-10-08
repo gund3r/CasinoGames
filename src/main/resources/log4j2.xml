@@ -16,7 +16,6 @@
     </Appenders>
     <Loggers>
         <Root level="info">
-            <!--<Root level="trace">-->
             <AppenderRef ref="Console"/>
             <AppenderRef ref="FileLogger" level="DEBUG"/>
         </Root>

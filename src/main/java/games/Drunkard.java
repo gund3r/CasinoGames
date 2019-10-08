@@ -38,9 +38,9 @@ public class Drunkard {
 
     private static void whenFirstDeckWin() {
         log.info("У Игрока №1 карта: {}, у Игрока №2 карта: {}", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
-        firstDeck.add(secondDeck.getFirst()); // в 1 колоду добавляем карту из колоды 2
-        secondDeck.remove(); // в колоде 2 удаляем карту которую добавили в колоду 1
-        firstDeck.offerLast(firstDeck.getFirst()); // в колоде 1 перемещаем карту в низ колоды
+        firstDeck.add(secondDeck.getFirst());
+        secondDeck.remove();
+        firstDeck.offerLast(firstDeck.getFirst());
         firstDeck.remove();
         log.info("Выиграл Игрок1!");
         log.info("У Игрока №1 {} карт, у Игрока №2 {}.", firstDeck.size(), secondDeck.size());
@@ -49,9 +49,9 @@ public class Drunkard {
 
     private static void whenSecondDeckWin() {
         System.out.printf("У Игрока №1 карта: %s, у Игрока №2 карта: %s%n", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
-        secondDeck.add(firstDeck.getFirst()); // в 2 колоду добавляем карту из колоды 1
-        firstDeck.remove(); // в колоде 1 удаляем карту которую добавили в колоду 2
-        secondDeck.offerLast(secondDeck.getFirst()); // в колоде 1 перемещаем карту в низ колоды
+        secondDeck.add(firstDeck.getFirst());
+        firstDeck.remove();
+        secondDeck.offerLast(secondDeck.getFirst());
         secondDeck.remove();
         log.info("Выиграл Игрок2!");
         log.info("У Игрока №1 {} карт, у Игрока №2 {}.", firstDeck.size(), secondDeck.size());
