@@ -6,3 +6,5 @@ maven-wrapper.jar
 /logs
 .idea/
 /.idea
+/*.iml
+./target
