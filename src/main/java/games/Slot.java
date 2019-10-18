@@ -6,32 +6,35 @@ import java.util.Random;
 
 public class Slot {
 
+    static Logger log = org.slf4j.LoggerFactory.getLogger(Slot.class);
+
     public static void main(String... __) {
 
-        Logger log = org.slf4j.LoggerFactory.getLogger(Slot.class);
+        Random r = new Random();
 
         int money = 100;
 
         int bet = 10;
 
-        int size = 7;
+        int DELTA = 100;
 
-        int reel1;
+        int SIZE = 7;
 
-        int reel2;
+        int firstReel = 0;
 
-        int reel3;
+        int secondReel = 0;
+
+        int thirdReel = 0;
 
         while (money > 0) {
-            Random r = new Random();
-            reel1 = r.nextInt(size);
-            reel2 = r.nextInt(size);
-            reel3 = r.nextInt(size);
+            firstReel = (firstReel + r.nextInt(DELTA)) % SIZE;
+            secondReel = (secondReel + r.nextInt(DELTA)) % SIZE;
+            thirdReel = (thirdReel + r.nextInt(DELTA)) % SIZE;
             log.info("У Вас {}$, ставка {}$", money, bet);
             log.info("Крутим барабаны! Розыгрыш принёс следующие результаты:");
-            log.info("первый барабан - {}, второй - {}, третий - {}", reel1, reel2, reel3);
-            if (reel1 == reel2 && reel2 == reel3) {
-                money += 1000;
+            log.info("первый барабан - {}, второй - {}, третий - {}", firstReel, secondReel, thirdReel);
+            if (firstReel == secondReel && secondReel == thirdReel) {
+                money += 1_000;
                 log.info("Выигрыш 1000$, ваш капитал теперь составляет: - {}$", money);
             } else {
                 money -= bet;
