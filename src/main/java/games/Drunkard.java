@@ -2,7 +2,9 @@ package games;
 
 import org.slf4j.Logger;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Deque;
 import java.util.List;
 
 import static games.Card.*;
@@ -11,28 +13,24 @@ public class Drunkard {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(Drunkard.class);
 
-    private static LinkedList<Card> deckOfCards = new LinkedList<Card>();
+    private static List<Card> deckOfCards = new LinkedList<>();
 
-    private static LinkedList<Card> firstDeck = new LinkedList<Card>();
+    private static Deque<Card> firstDeck = new LinkedList<>();
 
-    private static LinkedList<Card> secondDeck = new LinkedList<Card>();
-
-    private static List<Card> getDeckOfCards() {
-        return deckOfCards;
-    }
+    private static Deque<Card> secondDeck = new LinkedList<>();
 
     private static void createDeckOfCards() {
         for (int i = 0; i < getCardsTotalCount(); i++) {
-            getDeckOfCards().add(createCard(i));
+            deckOfCards.add(createCard(i));
         }
     }
 
     private static void dealCards() {
         for (int i = 0; i < getCardsTotalCount() / 2; i++) {
-            firstDeck.add(getDeckOfCards().get(i));
+            firstDeck.add(deckOfCards.get(i));
         }
         for (int y = getCardsTotalCount() / 2; y < getCardsTotalCount(); y++) {
-            secondDeck.add(getDeckOfCards().get(y));
+            secondDeck.add(deckOfCards.get(y));
         }
     }
 
@@ -48,7 +46,7 @@ public class Drunkard {
     }
 
     private static void whenSecondDeckWin() {
-        System.out.printf("У Игрока №1 карта: %s, у Игрока №2 карта: %s%n", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
+        log.info("У Игрока №1 карта: {}, у Игрока №2 карта: {}", firstDeck.getFirst().toString(), secondDeck.getFirst().toString());
         secondDeck.add(firstDeck.getFirst());
         firstDeck.remove();
         secondDeck.offerLast(secondDeck.getFirst());
@@ -86,7 +84,7 @@ public class Drunkard {
             if ((getCardDignity(secondDeck.getFirst()) == getCardDignity(firstDeck.getFirst()))) {
                 dispute();
             }
-            else {endGame();};
+            else endGame();
         }
     }
 
@@ -101,7 +99,7 @@ public class Drunkard {
 
     public static void main(String... __) {
         createDeckOfCards();
-        Collections.shuffle(getDeckOfCards());
+        Collections.shuffle(deckOfCards);
         dealCards();
         startGame();
     }
