@@ -10,11 +10,11 @@ import static games.Choice.getCharacterFromUser;
 
 public class BlackJack {
 
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(BlackJack.class);
+    public static final Logger log = org.slf4j.LoggerFactory.getLogger(BlackJack.class);
 
-    private static final int MAX_VALUE = 21;
+    public static final int MAX_VALUE = 21;
 
-    private static final int MAX_CARDS_COUNT = 8;
+    public static final int MAX_CARDS_COUNT = 8;
 
     private static int[] playersMoney = {100, 100};
 

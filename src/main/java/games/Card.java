@@ -2,17 +2,9 @@ package games;
 
 public class Card {
 
-    private static final int PARS_TOTAL_COUNT = Par.values().length;
+    public static final int PARS_TOTAL_COUNT = Par.values().length;
 
-    private static final int CARDS_TOTAL_COUNT = PARS_TOTAL_COUNT * Suit.values().length; //36
-
-    static int getParsTotalCount() {
-        return PARS_TOTAL_COUNT;
-    }
-
-    static int getCardsTotalCount() {
-        return CARDS_TOTAL_COUNT;
-    }
+    public static final int CARDS_TOTAL_COUNT = PARS_TOTAL_COUNT * Suit.values().length; //36
 
     private Suit suit;
 
@@ -23,17 +15,12 @@ public class Card {
         this.par = par;
     }
 
-    public Card() {
-        this.suit = suit;
-        this.par = par;
-    }
-
     static Suit getSuit(int cardNumber) {
-        return Suit.values()[cardNumber / getParsTotalCount()];
+        return Suit.values()[cardNumber / PARS_TOTAL_COUNT];
     }
 
     static Par getPar(int cardNumber) {
-        return Par.values()[cardNumber % getParsTotalCount()];
+        return Par.values()[cardNumber % PARS_TOTAL_COUNT];
     }
 
     static int getCardDignity(Card card) {

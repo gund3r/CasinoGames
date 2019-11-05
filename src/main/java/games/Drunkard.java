@@ -20,16 +20,16 @@ public class Drunkard {
     private static Deque<Card> secondDeck = new LinkedList<>();
 
     private static void createDeckOfCards() {
-        for (int i = 0; i < getCardsTotalCount(); i++) {
+        for (int i = 0; i < CARDS_TOTAL_COUNT; i++) {
             deckOfCards.add(createCard(i));
         }
     }
 
     private static void dealCards() {
-        for (int i = 0; i < getCardsTotalCount() / 2; i++) {
+        for (int i = 0; i < CARDS_TOTAL_COUNT / 2; i++) {
             firstDeck.add(deckOfCards.get(i));
         }
-        for (int y = getCardsTotalCount() / 2; y < getCardsTotalCount(); y++) {
+        for (int y = CARDS_TOTAL_COUNT / 2; y < CARDS_TOTAL_COUNT; y++) {
             secondDeck.add(deckOfCards.get(y));
         }
     }
